@@ -52,7 +52,7 @@ rm ripgrep_13.0.0_amd64.deb
 log "  - Installing thefuck..."
 sudo apt update
 sudo apt install python3-dev python3-pip python3-setuptools
-pip3 install thefuck --user
+yes | pip3 install thefuck --user
 
 log "  - Installing neovim..."
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
@@ -68,7 +68,7 @@ log "  - Installing lazygit..."
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
 tar xf lazygit.tar.gz lazygit
-sudo install lazygit /usr/local/bino
+sudo install lazygit /usr/local/bin
 
 rm lazygit.tar.gz
 
