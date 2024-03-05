@@ -49,10 +49,10 @@ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_
 sudo dpkg -i ripgrep_13.0.0_amd64.deb
 rm ripgrep_13.0.0_amd64.deb
 
-#log "  - Installing thefuck..."
-#sudo apt update
-#sudo apt install python3-dev python3-pip python3-setuptools
-#echo Y | pip3 install thefuck --user
+# log "  - Installing thefuck..."
+# sudo apt update
+# sudo apt install python3-dev python3-pip python3-setuptools
+# echo Y | pip3 install thefuck --user
 
 log "  - Installing neovim..."
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
