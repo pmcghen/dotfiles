@@ -74,7 +74,7 @@ log "Getting dotfiles from git..."
 git clone --bare https://github.com/pmcghen/dotfiles $HOME/.custom
 
 config() {
-	/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
+	/usr/bin/git --git-dir=$HOME/.custom/ --work-tree=$HOME $@
 }
 
 mkdir -p .config-backup
