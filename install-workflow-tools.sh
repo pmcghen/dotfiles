@@ -4,55 +4,53 @@
 
 # exist checks if a command exists in the shell
 exist() {
-  command -v "$1" >/dev/null 2>&1
+	command -v "$1" >/dev/null 2>&1
 }
 
 log() {
-  printf "\033[33,34m [%s] %s\n" "$(date)" "$1"
+	printf "\033[33;34m [%s] %s\n" "$(date)" "$1"
 }
 
 log "Installing workflow tools..."
 
-log "  - Installing curl..."
-sudo apt install curl
+if exist brew; then
+	log "  - Updating homebrew..."
+	brew update
+else
+	log "  - Installing homebrew"
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
 log "  - Installing neofetch..."
-sudo apt install neofetch
+brew install neofetch --quiet
 
 log "  - Installing zsh..."
-sudo apt install zsh
+brew install zsh --zsh
 
 log "    - Setting zsh to default shell..."
 chsh -s $(which zsh)
 
 log "    - Installing zsh syntax highlighting..."
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
-sudo apt install zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting 2>/dev/null
 
 log "    - Installing oh-my-zsh..."
 # https://ohmyz.sh/#install
 if ! [ -d ~/.oh-my-zsh ]; then
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
 log "  - Installing bat..."
-sudo apt install bat
-
-mkdir -p ~/.local/bin
-ln -s /usr/bin/batcat ~/.local/bin/bat
+brew install bat --quiet
 
 log "  - Installing tmux..."
-sudo apt install tmux
+brew install tmux --quiet
 
 log "  - Installing ripgrep..."
-curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
-sudo dpkg -i ripgrep_13.0.0_amd64.deb
-rm ripgrep_13.0.0_amd64.deb
+brew install ripgrep --quiet
 
-# log "  - Installing thefuck..."
-# sudo apt update
-# sudo apt install python3-dev python3-pip python3-setuptools
-# echo Y | pip3 install thefuck --user
+log "  - Installing thefuck..."
+brew install thefuck --quiet
 
 log "  - Installing neovim..."
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
@@ -76,17 +74,17 @@ log "Getting dotfiles from git..."
 git clone --bare https://github.com/pmcghen/dotfiles $HOME/.custom
 
 config() {
-   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
+	/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
 }
 
 mkdir -p .config-backup
 config checkout
 
 if [ $? = 0]; then
-  log "  - Checked out config..."
+	log "  - Checked out config..."
 else
-  log "  - Backing up existing dotfiles..."
-  config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs =I {} mv {} .config-backup/{}
+	log "  - Backing up existing dotfiles..."
+	config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs =I {} mv {} .config-backup/{}
 fi
 
 config checkout
@@ -94,4 +92,3 @@ config config status.showUntrackedFiles no
 
 printf "\033[92,34m Done! Please restart your terminal."
 log "Don't forget to install Fira Code! https://www.nerdfonts.com/font-downloads"
-
