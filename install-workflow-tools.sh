@@ -34,7 +34,10 @@ tar xf lazygit.tar.gz lazygit
 sudo install lazygit /usr/local/bin
 rm lazygit.tar.gz
 
-log "Installing FiraCode Nerd Font"
+log "Installing thefuck..."
+pip3 install thefuck --user
+
+log "Installing FiraCode Nerd Font..."
 curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip
 sudo unzip FiraCode.zip -d ~/.fonts
 rm FiraCode.zip
@@ -45,6 +48,8 @@ git clone --bare https://github.com/pmcghen/dotfiles $HOME/.custom
 config() {
 	/usr/bin/git --git-dir=$HOME/.custom/ --work-tree=$HOME $@
 }
+
+rm .zshrc
 
 mkdir -p .config-backup
 config checkout

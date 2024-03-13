@@ -10,7 +10,7 @@ sudo apt update
 sudo apt upgrade -y
 
 log "Installing system packages from apt..."
-sudo apt install fzf bat tmux curl git zsh neofetch -y
+sudo apt install fzf bat tmux curl git zsh neofetch python3-dev python3-pip python3-setuptools
 
 log "Setting zsh as your default shell..."
 chsh -s $(which zsh)
