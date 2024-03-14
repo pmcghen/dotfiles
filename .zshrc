@@ -14,7 +14,7 @@ COMPLETION_WAITING_DOTS="true"
 
 plugins=(
 	colored-man-pages
-        command-not-found
+  command-not-found
 	git
 	tmux
 	zsh-syntax-highlighting
@@ -35,7 +35,6 @@ alias djmanage="python3 manage.py"
 alias open="nautilus"
 alias gs="git status"
 alias note="echo >> ~/Documents/notes.md"
-alias lvim="/home/pat/.local/bin/lvim"
 
 export PATH=/home/pat/.local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
