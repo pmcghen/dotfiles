@@ -1,16 +1,15 @@
 #!/usr/bin/bash
 
 log() {
-	printf "\033[36;2m [%s] - \033[96;1m%s\n" "$(date)" "$1"
+	printf "\033[36;2m [%s] - \033[96;1m%s\033[0;39m\n" "$(date)" "$1"
 }
 
 log "Hi, $USER. Let's get your new machine set up."
 log "Updating apt..."
 sudo apt update
-sudo apt upgrade -y
 
 log "Installing system packages from apt..."
-sudo apt install fzf bat tmux curl git zsh neofetch python3-dev python3-pip python3-setuptools
+sudo apt install fzf bat tmux curl git zsh neofetch python3-dev python3-pip python3-setuptools unzip
 
 log "Setting zsh as your default shell..."
 chsh -s $(which zsh)

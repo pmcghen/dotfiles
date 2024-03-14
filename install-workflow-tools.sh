@@ -8,7 +8,7 @@ exist() {
 }
 
 log() {
-	printf "\033[36;2m [%s] - \033[96;1m%s\n" "$(date)" "$1"
+	printf "\033[36;2m [%s] - \033[96;1m%s\033[0;39m\n" "$(date)" "$1"
 }
 
 log "Installing zsh syntax highlighting..."
@@ -41,6 +41,9 @@ log "Installing FiraCode Nerd Font..."
 curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip
 sudo unzip FiraCode.zip -d ~/.fonts
 rm FiraCode.zip
+
+log "Installing Tmux Plugin Manager..."
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 log "Getting dotfiles from git..."
 git clone --bare https://github.com/pmcghen/dotfiles $HOME/.custom
