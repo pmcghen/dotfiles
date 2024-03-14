@@ -39,7 +39,7 @@ pip3 install thefuck --user
 
 log "Installing FiraCode Nerd Font..."
 curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip
-sudo unzip FiraCode.zip -d ~/.fonts
+yes | sudo unzip FiraCode.zip -d ~/.fonts
 rm FiraCode.zip
 
 log "Installing Tmux Plugin Manager..."
