@@ -21,6 +21,10 @@ if ! [ -d ~/.oh-my-zsh ]; then
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
+log "Installing Node.js..."
+curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&
+	sudo apt-get install -y nodejs
+
 log "Installing neovim..."
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 sudo rm -rf /opt/nvim
