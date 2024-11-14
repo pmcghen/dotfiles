@@ -29,17 +29,24 @@ source $ZSH/oh-my-zsh.sh
    export EDITOR='mvim'
  fi
 
-alias up="flatpak update; sudo apt update; sudo apt upgrade; sudo apt autoremove"
+alias up="flatpak update -y; sudo apt update; sudo apt upgrade -y; sudo apt autoremove -y; flatpak uninstall --unused --delete-data -y"
 alias i="sudo apt install"
-alias djmanage="python3 manage.py"
 alias open="nautilus"
 alias gs="git status"
 alias note="echo >> ~/Documents/notes.md"
 
 export PATH=/home/pat/.local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
-eval $(thefuck --alias)
 
-neofetch
+fastfetch
 
 alias config='/usr/bin/git --git-dir /home/pat/.custom/ --work-tree=/home/pat'
+
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+eval $(thefuck --alias)
